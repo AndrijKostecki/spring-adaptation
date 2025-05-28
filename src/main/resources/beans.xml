@@ -2,22 +2,23 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+       https://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="writer" class="writer.Writer"/>
-    <bean id="ozdobnikGwiazdki" class="writer.OzdobnikGwiazdka"/>
+
     <bean id="ozdobnikMinus" class="writer.OzdobnikMinus"/>
+    <bean id="ozdobnikGwiazdki" class="writer.OzdobnikGwiazdka"/>
 
     <bean id="nicewriter" class="writer.NiceWriter">
         <property name="ozdobnik" ref="ozdobnikMinus"/>
     </bean>
 
-
-
-    <bean id="test" class="test.Test">
+    <bean id="testService" class="service.TestService">
         <property name="writer" ref="nicewriter"/>
-        <property name="myName" value="Anita"/>
+        <property name="myName" value="Andrij"/>
     </bean>
 
-
+    <bean id="testController" class="controller.TestController">
+        <property name="testService" ref="testService"/>
+    </bean>
 </beans>
