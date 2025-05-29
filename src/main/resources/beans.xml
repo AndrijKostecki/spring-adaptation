@@ -4,21 +4,24 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="writer" class="writer.Writer"/>
-
-    <bean id="ozdobnikMinus" class="writer.OzdobnikMinus"/>
     <bean id="ozdobnikGwiazdki" class="writer.OzdobnikGwiazdka"/>
+    <bean id="ozdobnikMinus" class="writer.OzdobnikMinus"/>
 
-    <bean id="nicewriter" class="writer.NiceWriter">
-        <property name="ozdobnik" ref="ozdobnikMinus"/>
+    <bean id="niceWriter" class="writer.NiceWriter">
+        <property name="ozdobnik" ref="ozdobnikGwiazdki"/>
     </bean>
 
-    <bean id="testService" class="service.TestService">
-        <property name="writer" ref="nicewriter"/>
+    <bean id="writerService" class="main.Service.WriterService">
+        <constructor-arg ref="niceWriter"/>
+    </bean>
+
+    <bean id="testService" class="main.Service.TestService">
+        <property name="writer" ref="niceWriter"/>
         <property name="myName" value="Andrij"/>
     </bean>
 
-    <bean id="testController" class="controller.TestController">
+    <bean id="testController" class="main.Controller.TestController">
         <property name="testService" ref="testService"/>
     </bean>
+
 </beans>
